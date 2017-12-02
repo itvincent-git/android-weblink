@@ -11,7 +11,10 @@ import android.widget.Button
  * @author zhongyongsheng
  */
 
-class Sample2Fragment : Fragment() {
+class Sample2Fragment : Fragment(), NameableFragment {
+    override fun getFragmentName(): String {
+        return "Sample2"
+    }
 
     private val mOnClickListener = View.OnClickListener { v ->
         when (v.id) {

@@ -109,7 +109,13 @@ class MainActivity : AppCompatActivity() {
         }
 
         override fun getPageTitle(position: Int): CharSequence {
-            return sSubFragments[position].simpleName
+            val sub = sSubFragments[position]
+            when (sub) {
+                is NameableFragment -> {
+                    return sub.getFragmentName()
+                }
+            }
+            return sub.simpleName
         }
     }
 
