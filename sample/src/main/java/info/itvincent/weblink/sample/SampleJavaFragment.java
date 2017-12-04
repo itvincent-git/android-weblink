@@ -30,7 +30,7 @@ public class SampleJavaFragment extends Fragment {
         mRootView = inflater.inflate(R.layout.fragment_sample2, container, false);
         WebView webView = mRootView.findViewById(R.id.webview);
         WeblinkInterface weblinkInterface = new WeblinkInterface(webView);
-        webView.addJavascriptInterface(weblinkInterface, "weblink");
+        weblinkInterface.addModule(CommonUiModule.INSTANCE);
         webView.setWebChromeClient(new WebChromeClient());
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setWebViewClient(new WebViewClient() {
@@ -41,7 +41,7 @@ public class SampleJavaFragment extends Fragment {
             }
         });
 
-        webView.loadUrl("http://www.juejin.im");
+        webView.loadUrl("file:///android_asset/sample.html");
         return mRootView;
     }
 }

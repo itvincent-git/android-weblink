@@ -49,7 +49,7 @@ class Sample1Fragment : Fragment(), NameableFragment {
 
     companion object {
 
-        fun newIns(): Sample1Fragment {
+        fun newInstance(): Sample1Fragment {
             return Sample1Fragment()
         }
 

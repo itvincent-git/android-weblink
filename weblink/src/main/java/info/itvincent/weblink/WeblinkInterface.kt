@@ -34,7 +34,7 @@ class WeblinkInterface(webview: WebView) {
     }
 
     fun invokeCallback(callback: String, jsonParam: String) {
-        val cmd = "javascript:try{window.Weblink.invokeWebMethod('${callback}',JSON.parse(${jsonParam}))}catch(e){if(console)console.log(e)}"
+        val cmd = "javascript:try{window.weblink.invokeWebMethod('${callback}',JSON.parse(${jsonParam}))}catch(e){if(console)console.log(e)}"
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
             webviewRef.get()?.loadUrl(cmd)
         } else {

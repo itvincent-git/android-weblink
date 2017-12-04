@@ -88,13 +88,26 @@ class MainActivity : AppCompatActivity() {
 
         override fun getItem(position: Int): Fragment {
             try {
-                /*val aClass = sSubFragments[position]
-                val method = aClass.getMethod("newIns")
-                val invoke = method.invoke(null)*/
-                var method = sSubFragments[position]::newInstance
-                Log.i(TAG, "getItem " + position + "," + sSubFragments[position])
-                val invoke = method.invoke()
-                return invoke as Fragment
+                /*val fragmentClass = sSubFragments[position]
+                val companionClass = fragmentClass.declaredClasses.filter { it.simpleName == "Companion" }.getOrNull(0)
+                val newInsMethod = companionClass?.getDeclaredMethod("newInstance")
+                val companionField = fragmentClass.getField("Companion").get(null)
+                val invoke = newInsMethod?.invoke(companionField)
+                Log.i(TAG, "newInsMethod $fragmentClass $companionClass $newInsMethod")*/
+
+                //
+
+
+                val obj = ReflectionUtils.invokeCompanionMethod(sSubFragments[position], "newInstance");
+                if (obj != null)
+                    return obj as Fragment
+                else {
+                    var method = sSubFragments[position]::newInstance
+                    //Log.i(TAG, "getItem $position sSubFragments[$position]");
+                    val invoke = method.invoke()
+                    return invoke as Fragment
+                }
+
             } catch (e: Exception) {
                 Log.e(TAG, "newInstance error", e)
             }
