@@ -3,7 +3,6 @@ package info.itvincent.weblink
 import android.os.Build
 import android.util.Log
 import android.webkit.JavascriptInterface
-import android.webkit.ValueCallback
 import android.webkit.WebView
 import java.lang.ref.WeakReference
 
@@ -22,6 +21,9 @@ class WeblinkInterface(webview: WebView) {
         webview.addJavascriptInterface(this, jsApiName)
     }
 
+    /**
+     * js调用的方法
+     */
     @JavascriptInterface
     fun invoke(module: String, cmd: String, parameters: String, callback: String) {
         try {
@@ -33,10 +35,16 @@ class WeblinkInterface(webview: WebView) {
         }
     }
 
+    /**
+     * 添加功能模块
+     */
     fun addModule(module: WeblinkModule) {
         weblinkModules.put(module.moduleName, module)
     }
 
+    /**
+     * 回调js方法
+     */
     fun invokeCallback(callback: String, jsonParam: String) {
         try {
             val cmd = "javascript:try{window.$jsApiName.invokeWebMethod('$callback',$jsonParam)}catch(e){if(console)console.log(e)}"

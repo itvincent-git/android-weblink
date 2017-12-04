@@ -7,7 +7,14 @@ import android.webkit.WebView
  * @author zhongyongsheng
  */
 interface WeblinkModule {
+    /**
+     * 模块名称
+     */
     val moduleName: String
 
-    fun invokeModule(webview: WebView?, cmd: String, parameters: String, callback: String, callbackFunction: (String, String) -> Unit)
+    /**
+     * 模块调用的接口
+     */
+    fun invokeModule(webview: WebView?, cmd: String, parameters: String, callback: String,
+                     callbackFunction: (String, String) -> Unit)
 }

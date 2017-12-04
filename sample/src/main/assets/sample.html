@@ -8,9 +8,11 @@
        function callNative(code){
           switch (code) {
             case 0:
-                window.weblink.invoke("CommonUi", "toast", "{text:'callNative', isLong:false}", "");
+                //non callback
+                window.weblink.invoke("CommonUi", "toast", "{text:'Hello World', isLong:false}", "");
                 break;
             case 1:
+                //do callback
                 window.weblink.invoke("CommonUi", "time", "{}", "onTime");
                 break;
           }
@@ -18,7 +20,6 @@
 
        window.weblink.invokeWebMethod = function(callback, result) {
             document.getElementById("text").innerHTML = "onTime " + result.value;
-            //window.weblink.invoke("CommonUi", "toast", "{text:"onTime " + result.value, isLong:false}"", "");
        }
     </script>
 </head>

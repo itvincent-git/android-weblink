@@ -13,6 +13,7 @@ import info.itvincent.weblink.WeblinkInterface
 import kotlinx.android.synthetic.main.fragment_sample1.view.*
 
 /**
+ * kt的demo
  * @author zhongyongsheng
  */
 
