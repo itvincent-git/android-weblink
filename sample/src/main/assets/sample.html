@@ -5,12 +5,27 @@
     <title>Weblink sample</title>
 
     <script>
-       function callNative(){
-          window.weblink.invoke("CommonUi", "toast", "{isLong:false}", "");
+       function callNative(code){
+          switch (code) {
+            case 0:
+                window.weblink.invoke("CommonUi", "toast", "{text:'callNative', isLong:false}", "");
+                break;
+            case 1:
+                window.weblink.invoke("CommonUi", "time", "{}", "onTime");
+                break;
+          }
+       }
+
+       window.weblink.invokeWebMethod = function(callback, result) {
+            document.getElementById("text").innerHTML = "onTime " + result.value;
+            //window.weblink.invoke("CommonUi", "toast", "{text:"onTime " + result.value, isLong:false}"", "");
        }
     </script>
 </head>
 <body>
-<button type="button" onclick="callNative()" style="width:200px;height:70px">Call Native</button>
+<button type="button" onclick="callNative(0)" style="width:200px;height:70px">toast</button>
+<button type="button" onclick="callNative(1)" style="width:200px;height:70px">time</button>
+
+<div id="text"></div>
 </body>
 </html>
