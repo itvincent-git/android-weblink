@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
     init {
         //here goes static initializer code
         sSubFragments.add(Sample1Fragment::class.java)
-        sSubFragments.add(Sample2Fragment::class.java)
+        sSubFragments.add(SampleJavaFragment::class.java)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -110,11 +110,14 @@ class MainActivity : AppCompatActivity() {
 
         override fun getPageTitle(position: Int): CharSequence {
             val sub = sSubFragments[position]
-            when (sub) {
-                is NameableFragment -> {
-                    return sub.getFragmentName()
-                }
-            }
+//            when (sub) {
+//                is NameableFragment -> {
+//                    return sub.getFragmentName()
+//                }
+//            }
+//            if (sub is NameableFragment) {
+//                return sub.getFragmentName()
+//            }
             return sub.simpleName
         }
     }
