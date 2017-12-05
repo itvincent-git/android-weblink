@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebChromeClient
-import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import info.itvincent.weblink.WeblinkInterface
@@ -17,11 +16,7 @@ import kotlinx.android.synthetic.main.fragment_sample1.view.*
  * @author zhongyongsheng
  */
 
-class Sample1Fragment : Fragment(), NameableFragment {
-
-    override fun getFragmentName(): String {
-        return "Base"
-    }
+class SampleKotlinFragment : Fragment(){
 
     private val mOnClickListener = View.OnClickListener { v ->
         when (v.id) {
@@ -50,8 +45,8 @@ class Sample1Fragment : Fragment(), NameableFragment {
 
     companion object {
 
-        fun newInstance(): Sample1Fragment {
-            return Sample1Fragment()
+        fun newInstance(): SampleKotlinFragment {
+            return SampleKotlinFragment()
         }
 
     }

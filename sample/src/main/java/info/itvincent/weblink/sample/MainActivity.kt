@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import android.os.Bundle
-import android.support.design.widget.TabLayout
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
@@ -30,13 +29,13 @@ class MainActivity : AppCompatActivity() {
      * [android.support.v4.app.FragmentStatePagerAdapter].
      */
     private var mSectionsPagerAdapter: SectionsPagerAdapter? = null
-    internal var sSubFragments: MutableList<Class<out Fragment>> = ArrayList()
+    internal var sSubFragments: MutableMap<String, Class<out Fragment>> = HashMap()
     private val TAG = "MainActivity"
 
     init {
         //here goes static initializer code
-        sSubFragments.add(Sample1Fragment::class.java)
-        sSubFragments.add(SampleJavaFragment::class.java)
+        sSubFragments.put("Kotlin", SampleKotlinFragment::class.java)
+        sSubFragments.put("Java", SampleJavaFragment::class.java)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -88,12 +87,13 @@ class MainActivity : AppCompatActivity() {
 
         override fun getItem(position: Int): Fragment {
             try {
-                val obj = ReflectionUtils.invokeCompanionMethod(sSubFragments[position], "newInstance");
+                val subFragment = sSubFragments.values.elementAt(position)
+                //find newInstance to create fragment
+                val obj = ReflectionUtils.invokeCompanionMethod(subFragment, "newInstance");
                 if (obj != null)
                     return obj as Fragment
                 else {
-                    var method = sSubFragments[position]::newInstance
-                    //Log.i(TAG, "getItem $position sSubFragments[$position]");
+                    var method = subFragment::newInstance
                     val invoke = method.invoke()
                     return invoke as Fragment
                 }
@@ -112,16 +112,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         override fun getPageTitle(position: Int): CharSequence {
-            val sub = sSubFragments[position]
-//            when (sub) {
-//                is NameableFragment -> {
-//                    return sub.getFragmentName()
-//                }
-//            }
-//            if (sub is NameableFragment) {
-//                return sub.getFragmentName()
-//            }
-            return sub.simpleName
+            return sSubFragments.keys.elementAt(position)
         }
     }
 
