@@ -30,7 +30,7 @@ public class SampleJavaFragment extends Fragment {
         mRootView = inflater.inflate(R.layout.fragment_sample2, container, false);
         WebView webView = mRootView.findViewById(R.id.webview);
         WeblinkInterface weblinkInterface = new WeblinkInterface(webView);
-        weblinkInterface.addModule(CommonUiModule.INSTANCE);
+        weblinkInterface.addModule(JavaCommonUiModule.getInstance());
         webView.setWebChromeClient(new WebChromeClient());
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setWebViewClient(new WebViewClient() {
